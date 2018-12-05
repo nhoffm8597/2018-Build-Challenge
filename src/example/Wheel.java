@@ -69,16 +69,14 @@ public class Wheel implements Runnable {
 
 	/*
 	 * Generally, running would be instantiated up top by the Sparks, but it is here
-	 * for convenience. This is a Boolean object, which means it is more advanced
-	 * than a regular boolean, which is a primitive. Thus, it is defined like an
-	 * object (Refresher: "Object myObject = new Object();")
+	 * for convenience.
 	 */
-	private Boolean running = new Boolean(false);
+	private boolean running = false;
 
 	public void startWheel() {
 		// Synchronized ensures that, in a multi-threaded project, two threads can't
 		// access the same resource at the same time, preventing errors and other issues
-		synchronized (running) {
+		synchronized (this) {
 			/*
 			 * If running is already true, we do not want to create a second Thread, so we
 			 * simply return out of the method and do nothing.
