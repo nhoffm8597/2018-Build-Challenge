@@ -78,6 +78,7 @@ public class Wheel implements Runnable {
 	public void startWheel() {
 		// Synchronized ensures that, in a multi-threaded project, two threads can't
 		// access the same resource at the same time, preventing errors and other issues
+		// Running MUST be a Boolean object! Read the above comment for clarification on that
 		synchronized (running) {
 			/*
 			 * If running is already true, we do not want to create a second Thread, so we
