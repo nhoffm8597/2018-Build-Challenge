@@ -8,8 +8,6 @@ import edu.wpi.first.wpilibj.Spark;
 //You need to remember this "implements Runnable" part or the code won't work!
 //This is going to force you to add a run() method because it is an interface. Don't worry too much about that; it's a concept we'll cover later.
 public class Wheel implements Runnable {
-	//XBOX CONTROLLER IMPLEMENTATION COMING SOON
-	
 	/*
 	 * Create sparks here for however many wheels your teams is using (should be at
 	 * most 2) Remember that this is private, meaning that it is particular to this
@@ -17,6 +15,13 @@ public class Wheel implements Runnable {
 	 */
 	private Spark myWheel;
 	private Spark myWheel2; // Only needed if using a second wheel
+
+	/*
+	 * I think you'll be able to figure out the XboxController implementation based
+	 * on the comments and your ability to infer and apply information. If you have
+	 * any questions, just ask Hershal
+	 */
+	private XboxController xbox;
 
 	/*
 	 * The comment above the constructor is called a javadoc comment, which means it
@@ -35,17 +40,18 @@ public class Wheel implements Runnable {
 	 */
 	public Wheel(int channel) {
 		myWheel = new Spark(channel);
+		xbox = new XboxController(0);
 		startWheel();
 	}
 
 	/*
-	 * Wait, how do you have two constructors with the same name? How does that
-	 * work? Glad you asked! This is what is known as "overloading." Essentially,
-	 * this means that I can have the same method name (or in this case, a
-	 * constructor) as long as I have two different sets of parameters. Notice how
-	 * the first constructor only has one int parameter while this one has two. As
-	 * long as you have a different set of parameters (in type or order; you have to
-	 * change more than the name) you can overload it.
+	 * Wait, you have two constructors with the same name! How does that work? Glad
+	 * you asked! This is what is known as "overloading." Essentially, this means
+	 * that I can have the same method name (or in this case, a constructor) as long
+	 * as I have two different sets of parameters. Notice how the first constructor
+	 * only has one int parameter while this one has two. As long as you have a
+	 * different set of parameters (in type or order; you have to change more than
+	 * the name) you can overload it.
 	 * 
 	 * Why do this? This allows for greater control over the code. For example, in
 	 * this case, I have prepared this Wheel object for two scenarios: one with one
@@ -64,6 +70,7 @@ public class Wheel implements Runnable {
 	public Wheel(int channelOne, int channelTwo) {
 		myWheel = new Spark(channelOne);
 		myWheel2 = new Spark(channelTwo);
+		xbox = new XboxController(0);
 		startWheel();
 	}
 
@@ -124,6 +131,16 @@ public class Wheel implements Runnable {
 			myWheel.set(0.5);
 			myWheel2.set(0.5);
 
+			// You can also use the XboxController object we made here. Ex:
+			if (xbox.getButton(XboxController.BUTTON_A)) {
+				/*
+				 * This code is ran whenever the A button on the controller is pressed. Notice
+				 * how BUTTON_A was accessed. This is how you access static information. Use the
+				 * name of the class itself, then a period, then the static variable or method
+				 * you want to access. Confused about this concept? Ask Hershal or Evan!
+				 */
+			}
+
 			/*
 			 * Every thread should have a Thread.sleep which makes it wait for some
 			 * specified amount of milliseconds. Please note this is NOT seconds so please
@@ -137,15 +154,16 @@ public class Wheel implements Runnable {
 			}
 		}
 	}
-	
+
 	/**
 	 * Pop quiz! What does this do?
+	 * 
 	 * @return
 	 */
 	public boolean getRunning() {
 		return running;
 	}
-	
+
 	/**
 	 * You're all smart kids, I think you can figure out what this does!
 	 */
@@ -153,12 +171,12 @@ public class Wheel implements Runnable {
 		myWheel.set(0);
 		myWheel2.set(0);
 	}
-	
+
 	/**
 	 * I'm sorry in advance if you're a devout Christian and I offended you
 	 */
 	public void summonSatan() {
-		//Don't worry about this method
+		// Don't worry about this method
 	}
 
 }
