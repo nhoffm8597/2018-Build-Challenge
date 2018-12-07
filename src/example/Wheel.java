@@ -38,7 +38,7 @@ public class Wheel implements Runnable {
 	 *                roboRIO. Remember that this is a local variable, meaning it
 	 *                only exists inside this constructor.
 	 */
-	public Wheel(int channel) {
+	Wheel(int channel) {
 		myWheel = new Spark(channel);
 		xbox = new XboxController(0);
 		startWheel();
